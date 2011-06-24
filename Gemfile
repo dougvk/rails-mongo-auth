@@ -8,6 +8,9 @@ gem 'bson'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
+group :production do
+    gem 'therubyracer-heroku'
+end
 
 
 # Asset template engines
