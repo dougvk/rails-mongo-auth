@@ -1,4 +1,16 @@
 Metapac::Application.routes.draw do
+  resources :sessions, :only => [:new, :create, :destroy]
+  resources :users, :only => [:new, :create, :show]
+
+  match '/signup', :to => 'users#new'
+
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+
+  match '/about', :to => 'public_pages#about'
+
+  root :to => "public_pages#home"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,9 @@
+<h1><%= title %></h1>
+<p>	
+	This is the home page for MetaPAC.us
+</p>
+<% if !signed_in? %>
+<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+<% else %>
+<strong>Welcome back, now go exercise your freedom!</strong>
+<% end %>

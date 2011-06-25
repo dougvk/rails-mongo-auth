@@ -6,6 +6,7 @@ gem 'mongo'
 gem 'bson_ext'
 gem 'bson'
 gem 'thin'
+gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
