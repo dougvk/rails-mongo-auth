@@ -1,24 +1,35 @@
 class User
   include MongoMapper::Document
+
+  # makes sure User not saved in mongo before validation
   safe
 
-  attr_accessible :email, :password, :password_confirmation
-  attr_accessor :password
+  attr_accessible :email, :password, :password_confirmation, :address, :name
+  attr_accessor   :password
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates_presence_of :password, :on => :create
-  validates :email, :presence   => true,
-                    :format     => { :with => email_regex },
-                    :uniqueness => { :case_sensitive => false }
-  validates :password, :confirmation => true,
-                       :length       => { :within => 6..40 }
+  validates_presence_of :password,   :on => :create
 
-  key :email, String
+  validates :email,     :format         => { :with => email_regex },
+                        :uniqueness     => { :case_sensitive => false }
+
+  validates :password,  :confirmation   => true,
+                        :length         => { :within => 6..40 }
+
+  validates_associated :address
+
+  key :email,         String, :required => true
   key :password_hash, String
   key :password_salt, String
+  key :name,          String, :required => true
+  key :url,           String
+  key :donor,         Boolean
+  one :address
+  timestamps!
 
   User.ensure_index [[:email, 1]], :unique => true
+  User.ensure_index([[:donor, 1], [:name, 1]])
 
   before_save :encrypt_password
 
@@ -44,4 +55,19 @@ class User
         self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
       end
     end
+
+    def check_address
+    end
+end
+
+class Address
+  include MongoMapper::EmbeddedDocument
+
+  validates_length_of :state, :is => 2
+
+  key :address1, String,  :required => true
+  key :address2, String
+  key :city,     String,  :required => true
+  key :state,    String,  :required => true
+  key :zipcode,  String,  :required => true
 end

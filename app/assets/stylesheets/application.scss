@@ -26,10 +26,14 @@ $background: #ffb817;
 body { background: $background; }
 
 header {
-    padding: 1em;
-    background: white;
+    padding-top: 20px;
+    background: $background;
     @include rounded_generic(10px);
     div { clear: both; }
+    img {
+      padding: 1em;
+      background: #cff;
+    }
 }
 
 section {
@@ -94,21 +98,21 @@ a.signup_button {
 
 .round { @include rounded-generic(10px); }
 
-table .profile {
+table.profile {
     width: 100%;
     margin-bottom: 1em;
 }
 
-td .main {
+td.main {
     width: 70%;
     padding: 1em;
 }
 
-td .sidebar {
+td.sidebar {
     width: 30%;
     padding: 1em;
     vertical-align: top;
-    background: #ffc;
+    background: #cff;
 }
 
 div.field, div.actions { margin-bottom: 10px; }
