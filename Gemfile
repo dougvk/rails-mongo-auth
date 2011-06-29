@@ -14,6 +14,16 @@ group :production do
     gem 'therubyracer-heroku'
 end
 
+group :development, :test do
+    gem "rspec-rails"
+end
+
+group :test do
+    gem "factory_girl"
+    gem "factory_girl_rails"
+    gem "webrat"
+end
+
 
 # Asset template engines
 gem 'sass-rails', "~> 3.1.0.rc"

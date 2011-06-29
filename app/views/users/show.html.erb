@@ -2,12 +2,13 @@
 	<tr>
 		<td class="main">
 			<h1>
-				<%= @user.email %>
+				<%= @user.title %>
 			</h1>
 		</td>
 		<td class="sidebar round">
-			<strong>Name</strong> <%= @user.email %><br />
-			<strong>URL</strong> <%= link_to user_path(@user), @user %>
+      <strong>Company</strong><br /><%= @user.title %><br />
+      <strong>Contact</strong><br /><%= @user.email <br />%>
+      <strong>Site</strong><br /><a href="http://www.peta.org">http://www.peta.org</a><br />
 		</td>
 	</tr>
 </table>

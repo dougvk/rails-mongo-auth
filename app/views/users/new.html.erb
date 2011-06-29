@@ -3,8 +3,8 @@
 <%= form_for(@user) do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
 	<div class="field">
-		<%= f.label :name %><br />
-		<%= f.text_field :name %>
+    <%= f.label :title, "Company or Name" %><br />
+		<%= f.text_field :title %>
 	</div>
 	<div class="field">
 		<%= f.label :email %><br />
@@ -17,10 +17,6 @@
 	<div class="field">
 		<%= f.label :password_confirmation, "Confirmation" %><br />
 		<%= f.password_field :password_confirmation %>
-	</div>
-	<div class="field">
-		<%= f.label :donor, "Are you a Donor?" %><br />
-		<%= f.check_box :donor %>
 	</div>
 	<div class="actions">
 		<%= f.submit "Sign up"%>
