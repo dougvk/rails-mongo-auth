@@ -37,6 +37,9 @@ class UsersController < ApplicationController
     else
       # runs the tag creation as background process so it
       # doesn't hold up the redirect
+      if not @user.url.nil?
+        call_rake :delete_tag_associations, :user_id => params[:id]
+      end
       call_rake :create_tag_associations, :user_id => params[:id], :user_url => params[:user][:url]
     end
     @user.set(params[:user])

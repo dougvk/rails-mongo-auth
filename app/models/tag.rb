@@ -10,8 +10,6 @@ class Tag
   key :tag,   String,   :required     => true
   key :count, Integer,  :default      => 1
 
-  many :tag_associations
-
   Tag.ensure_index(:tag)
   Tag.ensure_index(:count)
 

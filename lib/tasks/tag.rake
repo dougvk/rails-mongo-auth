@@ -2,8 +2,22 @@ require 'nokogiri'
 require 'open-uri'
 
 # TODO: JSON-ify tag list and export to ThriftDB
+desc "Delete tag associations"
+task :delete_tag_associations => :environment do
+  user = User.find(ENV['USER_ID'])
+
+  user_associations = TagAssociation.find_all_by_user_id(user.id)
+  user_associations.each do |ta|
+    tag = Tag.find_by_id(ta.tag_id)
+    tag.decrement(:count => 1)
+    ta.delete
+  end
+end
+
 desc "Create tag associations"
 task :create_tag_associations => :environment do
+  sleep 10
+
   # find user to associate with
   user = User.find(ENV['USER_ID'])
 
@@ -36,6 +50,6 @@ task :create_tag_associations => :environment do
     else
       tag.save
     end
-    ta = TagAssociation.create!(:user => user, :tag => tag)
+    ta = TagAssociation.create!(:user_id => user.id, :tag_id => tag.id)
   end
 end

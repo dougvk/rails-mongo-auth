@@ -26,8 +26,6 @@ class User
   key :url,           String, :default  => nil
   one :address
 
-  many :tag_associations
-
   key :authorized_recipient, Boolean, :default => false
   timestamps!
 

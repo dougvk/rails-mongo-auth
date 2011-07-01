@@ -3,16 +3,13 @@ class TagAssociation
   # makes sure User not saved in mongo before validation
   safe
 
-  attr_accessible :user, :tag
+  attr_accessible :user_id, :tag_id
 
-  validates_associated :user
-  validates_associated :tag
+  key :user_id, ObjectId
+  key :tag_id, ObjectId
 
-  belongs_to :user
-  belongs_to :tag
-
-  TagAssociation.ensure_index(:user)
-  TagAssociation.ensure_index(:tag)
+  TagAssociation.ensure_index(:user_id)
+  TagAssociation.ensure_index(:tag_id)
 
   timestamps!
 end
