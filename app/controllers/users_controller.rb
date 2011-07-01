@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
@@ -21,11 +23,39 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if not url_exists 
+      params[:user][:url] = nil
+    elsif @user.url.eql? params[:user][:url]
+      # do nothing if same url
+    else
+      # runs the tag creation as background process so it
+      # doesn't hold up the redirect
+      call_rake :create_tag_associations, :user_id => params[:id], :user_url => params[:user][:url]
+    end
+    @user.set(params[:user])
+    redirect_to @user
+  end
   
   private
   
     def authenticate
       deny_access unless signed_in?
+    end
+    
+    def url_exists
+      begin
+        open(params[:user][:url])
+      rescue
+        return false
+      end
+      return true
     end
     
     def correct_user

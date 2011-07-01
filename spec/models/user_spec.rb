@@ -12,7 +12,7 @@ describe User do
   end
 
   it "should require an email address" do
-    u = User.new(Factory.attributes_for(:user, :email => "dougvk@gmail.com", :name => nil))
+    u = User.new(Factory.attributes_for(:user, :email => "dougvk@gmail.com", :title => nil))
     u.valid?.should == false
   end
 

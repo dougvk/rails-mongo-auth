@@ -14,8 +14,7 @@ class User
   validates :email,     :format         => { :with => email_regex },
                         :uniqueness     => { :case_sensitive => false }
 
-  validates :password,  :confirmation   => true,
-                        :length         => { :within => 6..40 }
+  validates :password,  :confirmation   => true
 
   validates_associated :address
 
@@ -27,7 +26,9 @@ class User
   key :url,           String, :default  => nil
   one :address
 
-  key :authorized_recipient Boolean, :default => false
+  many :tag_associations
+
+  key :authorized_recipient, Boolean, :default => false
   timestamps!
 
   User.ensure_index [[:email, 1]], :unique => true

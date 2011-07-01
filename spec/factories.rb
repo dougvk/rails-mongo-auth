@@ -1,7 +1,7 @@
 require 'factory_girl'
 
 Factory.define :user do |f|
-  f.title "foo#{rand(100000)}"
+  f.sequence(:title) { |n| "foo#{n}" }
   f.email { |u| u.title + "@gmail.com" }
   f.password "password"
   f.password_confirmation { |u| u.password }

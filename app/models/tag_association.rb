@@ -1,13 +1,18 @@
 class TagAssociation
   include MongoMapper::Document
-  
-  attr_accessible :users, :tags
+  # makes sure User not saved in mongo before validation
+  safe
 
-  key :user_ids,  Array
-  many :users,    :in => :user_ids
+  attr_accessible :user, :tag
 
-  key :tag_ids,   Array
-  many :tags,     :in => :tag_ids
+  validates_associated :user
+  validates_associated :tag
+
+  belongs_to :user
+  belongs_to :tag
+
+  TagAssociation.ensure_index(:user)
+  TagAssociation.ensure_index(:tag)
 
   timestamps!
 end
