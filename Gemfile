@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0.rc4'
+gem 'nokogiri'
 gem 'mongo_mapper'
 gem 'mongo'
 gem 'bson_ext'
