@@ -6,6 +6,7 @@ desc "Delete tag associations"
 task :delete_tag_associations => :environment do
   user = User.find(ENV['USER_ID'])
 
+  # find all associated TAs and Tags then remove/decrement them
   user_associations = TagAssociation.find_all_by_user_id(user.id)
   user_associations.each do |ta|
     tag = Tag.find_by_id(ta.tag_id)
@@ -28,6 +29,10 @@ task :create_tag_associations => :environment do
 
   # get list of tag words separated by ": "
   res = doc.css('ol.dir li a').map { |link| [link.content, n+=1] }
+
+  # no tags exist? Lame.
+  if res == []
+    return
 
   # parse out lame formatting
   res = res.select{|x| x[1] % 2 == 1}

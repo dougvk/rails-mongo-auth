@@ -4,7 +4,7 @@ class User
   # makes sure User not saved in mongo before validation
   safe
 
-  attr_accessible :email, :password, :password_confirmation, :address, :title, :donor
+  attr_accessible :email, :password, :password_confirmation, :address, :title
   attr_accessor   :password
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -1,0 +1,25 @@
+User:
+    -address
+    -email
+    -title
+    -business url
+
+Tag:
+    -count
+    -tag string
+
+TagAssociation: # basically a NoSQL join table of user<->tag
+    -user_id
+    -tag_id
+
+Commit 66f2a599f7f6f25a2ddb68f1b6f25cbd277396d9 has just the User model with
+authentication/sessions working with MongoDB. Anything after that has the User,
+if he specifies a URL, get autotagged based on the categories associated with
+his site on http://www.dmoz.org, the human-curated categorization site.
+
+Future updates:
+
+1) Make the user discoverable based on his tags, by leveraging ThriftDB for a 
+simple, powerful search tool.
+
+2) Auto-updating, navigational tag cloud for visual search.

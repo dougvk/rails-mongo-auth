@@ -35,8 +35,8 @@ class UsersController < ApplicationController
     elsif @user.url.eql? params[:user][:url]
       # do nothing if same url
     else
-      # runs the tag creation as background process so it
-      # doesn't hold up the redirect
+      # runs the tag creation as background process so it won't hold up the page
+      # rendering.
       if not @user.url.nil?
         call_rake :delete_tag_associations, :user_id => params[:id]
       end
@@ -52,6 +52,7 @@ class UsersController < ApplicationController
       deny_access unless signed_in?
     end
     
+    # just tests for existence of affiliate website
     def url_exists
       begin
         open(params[:user][:url])
